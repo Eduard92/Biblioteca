@@ -1,0 +1,105 @@
+﻿@model IEnumerable<DataLayer.modules>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.slug)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.skip_xss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_frontend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_backend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.menu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.enabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.installed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.is_core)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.updated_on)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.slug)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.skip_xss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.is_frontend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.is_backend)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.menu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.enabled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.installed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.is_core)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.updated_on)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,194 @@
+﻿@model RK.Models.EmpleadoModel
+
+@{
+    ViewBag.Title = "Detalles del empleado";
+}
+
+<div class="panel" ng-controller="InputCtrl">
+        <div class="panel-heading">Modificar empleado "@Model.nombre @Model.apellido_paterno"</div>
+        <div class="panel-body">
+
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#tabs-general" data-toggle="tab">
+                  Datos generales
+                </a>
+              </li>
+              <li>
+                <a href="#tabs-admin" data-toggle="tab">
+                 Datos administrativos
+                </a>
+              </li>
+              
+            </ul>
+            <div class="tab-content tab-content-bordered">
+              <div class="tab-pane fade in active" id="tabs-general">
+                    @Html.HiddenFor(model => model.id)
+                  <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.nombre)
+                                <p class="form-control-static bg-white darken p-l-1">@Html.DisplayFor(model => model.nombre )</p>
+                                
+                               
+                            </div>
+                           <div class="form-group">
+                                @Html.LabelFor(model => model.apellido_paterno)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.apellido_paterno)
+                                    </p>
+                              
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.apellido_materno)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.apellido_materno)
+                                    </p>
+                               
+                            </div>
+                            <div class="form-group" ng-init="fecha_nacimiento='@String.Format("{0:dd/MM/yyyy}",Model.fecha_nacimiento)'">
+                                 
+                                @Html.LabelFor(model => model.fecha_nacimiento)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model=>model.fecha_nacimiento)
+                                    </p>
+                               
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.email)
+                                    </p>
+                               
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.rfc)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.rfc)
+                                    </p>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.curp)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.curp)
+                                    </p>
+                               
+                            </div>
+                           <div class="form-group">
+                                @Html.LabelFor(model => model.telefono)
+                                <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.telefono)
+                                    </p>
+                                @Html.ValidationMessageFor(model => model.telefono)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.direccion)
+                               <p class="form-control-static bg-white darken p-l-1">
+                                @Html.DisplayFor(model => model.direccion)
+                                   </p>
+                                @Html.ValidationMessageFor(model => model.direccion)
+                            </div>
+                             <div class="form-group">
+                                @Html.LabelFor(model => model.activo)
+                                 <p class="form-control-static bg-white darken p-l-1">
+                                 @(Model.activo==1?"SI":"NO")
+                                 </p>
+                                
+                            </div>
+                      </div>
+                      <div class="col-md-6">
+                          
+                          <div class="form-group">
+                            @Html.LabelFor(model => model.fotografia)
+                            
+                              <hr />
+                             
+                              <div class="row" >
+
+                                  <div class="col-md-3" ng-init="camera='@Model.camera'" >
+                                      
+                                           <block-image ng-if="!camera" from="fotografia" name="fotografia" value="@Model.fotografia"  ></block-image>
+                                          
+                                          
+                                           
+                                          
+                                         
+                                       
+                                  </div>
+                                 
+                              </div>
+                              
+                              
+                           </div>
+                      </div>
+                  </div>
+                    
+              </div>
+              <div class="tab-pane fade in" id="tabs-admin">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group" ng-init="id_centro='@Model.id_centro'">
+                            @Html.LabelFor(model => model.id_centro)
+        
+                            <p class="form-control-static bg-white darken p-l-1">
+                                @ViewBag.centro
+                            </p>
+                           
+                            @Html.ValidationMessageFor(model => model.id_centro)
+                        </div>
+
+                        <div class="form-group" ng-init="id_area={Key:@(Model.id_area==null?0:Model.id_area)}">
+                            @Html.LabelFor(model => model.id_area)
+                            <p class="form-control-static bg-white darken p-l-1">
+                                @ViewBag.area
+                            </p>
+                           
+                           
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.tipo_mando)
+                    
+                            
+                            <p class="form-control-static bg-white darken p-l-1">
+                            @Html.DisplayFor(model=>model.tipo_mando)
+                            </p>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            @Html.LabelFor(model => model.cargo)
+                            <p class="form-control-static bg-white darken p-l-1">
+                            @Html.DisplayFor(model => model.cargo)
+                            </p>
+                        </div>
+                    
+                         <div class="form-group">
+                            @Html.LabelFor(model => model.id_empleado)
+                             <p class="form-control-static bg-white darken p-l-1">
+                            @Html.DisplayFor(model => model.id_empleado)
+                                 </p>
+                           
+                        </div>
+                       
+
+                      </div>
+                  </div>
+                    
+
+        
+
+                    
+              </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+             @Html.ActionLink("Ir a listado", "Index", null,new { @class="btn btn-default"})
+            
+           
+        </div>
+    </div>

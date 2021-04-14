@@ -1,0 +1,27 @@
+﻿@model DataLayer.vareas
+@{
+    ViewBag.Title = "Eliminar registro";
+}
+<div class="panel">
+    <div class="panel-heading">Eliminar registro</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal text-uppercase">
+            <dt>@Html.DisplayNameFor(model=>model.centro)</dt>
+            <dd>@Html.DisplayFor(model=>model.centro)</dd>
+            <dt>@Html.DisplayNameFor(model=>model.area)</dt>
+            <dd>@Html.DisplayFor(model=>model.area)</dd>
+        </dl>
+    </div>
+    <div class="panel-footer">
+       
+    
+       
+       
+           
+             @Html.ActionLink("Ir a listado", "Index", null, new { @class="btn btn-default"})
+             
+   
+       
+
+    </div>
+</div>

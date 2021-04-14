@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DataLayer.empleados>
+@{
+    ViewBag.Title = "Upload";
+}
+@using (Html.BeginForm()) {
+
+<div class="panel" ng-controller="InputUpload">
+    <div class="panel-heading">
+        Importar datos
+    </div>
+    <div class="panel-body">
+        <div class="alert" ng-if="message" ng-class="{'alert-danger':!status,'alert-success':status}">{{message}}</div>
+        <label class="custom-file m-b-2">
+                <input type="file" class="custom-file-input" ng-model="file" ngf-select="upload_file(file)"  accept=".csv"/>
+                <span class="custom-file-control form-control">Selecciona el archivo...</span>
+        </label>
+        <div class="table-responsive" ng-if="empleados.length>0">
+             <table class="table" width="100%" >
+                <thead>
+                    <tr>
+                                      
+                        <th width="100">@Html.DisplayNameFor(model=>model.id_empleado)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.id_centro)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.id_area)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.nombre)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.apellido_paterno)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.apellido_materno)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.cargo)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.fecha_nacimiento)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.email)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.rfc)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.curp)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.direccion)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.telefono)</th>
+                        <th width="100">@Html.DisplayNameFor(model=>model.tipo_mando)</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr ng-repeat="empleado in empleados" >
+                        <td ng-class="{'danger':!empleado.id}"><input type="hidden"  value="{{empleado.fotografia}}" ng-if="empleado.fotografia" name="empleados[{{$index}}].fotografia"  /><input type="hidden"  value="{{empleado.id}}" name="empleados[{{$index}}].id_empleado"  />{{empleado.id}}</td>
+                        <td ng-class="{'danger':!empleado.centro}"><input type="hidden"  value="{{empleado.centro}}" name="empleados[{{$index}}].id_centro"/>{{empleado.centro}}</td>
+                        <td ng-class="{'danger':!empleado.area}"><input type="hidden"  value="{{empleado.area}}" name="empleados[{{$index}}].id_area"/>{{empleado.area}}</td>
+                        <td ng-class="{'danger':!empleado.nombre}"><input type="hidden"  value="{{empleado.nombre}}" name="empleados[{{$index}}].nombre"/>{{empleado.nombre}}</td>
+                        <td ng-class="{'danger':!empleado.apellido_paterno}"><input type="hidden"  value="{{empleado.apellido_paterno}}"  name="empleados[{{$index}}].apellido_paterno"/>{{empleado.apellido_paterno}}</td>
+                        <td ng-class="{'danger':!empleado.apellido_materno}"><input type="hidden"  value="{{empleado.apellido_materno}}" name="empleados[{{$index}}].apellido_materno"/>{{empleado.apellido_materno}}</td>
+                        <td ng-class="{'danger':!empleado.cargo}"><input type="hidden"  value="{{empleado.cargo}}" name="empleados[{{$index}}].cargo"/>{{empleado.cargo}}</td>
+                        <td ng-class="{'danger':!empleado.fecha_nac}"><input type="hidden"  value="{{empleado.fecha_nac}}"  name="empleados[{{$index}}].fecha_nacimiento"/>{{empleado.fecha_nac}}</td>
+                        <td ng-class="{'danger':!empleado.email}"><input type="hidden"  value="{{empleado.email}}" name="empleados[{{$index}}].email"/>{{empleado.email}}</td>
+                        <td ng-class="{'danger':!empleado.rfc}"><input type="hidden"  value="{{empleado.rfc}}" name="empleados[{{$index}}].rfc"/>{{empleado.rfc}}</td>
+                        <td ng-class="{'danger':!empleado.curp}"><input type="hidden" value="{{empleado.curp}}"  name="empleados[{{$index}}].curp"/>{{empleado.curp}}</td>
+                        <td ng-class="{'danger':!empleado.direccion}"><input type="hidden"  value="{{empleado.direccion}}" name="empleados[{{$index}}].direccion"/>{{empleado.direccion}}</td>
+                        <td ng-class="{'danger':!empleado.telefono}"><input type="hidden"  value="{{empleado.telefono}}"  name="empleados[{{$index}}].telefono"/>{{empleado.telefono}}</td>
+                        <td ng-class="{'danger':!empleado.mando}"><input type="hidden" value="{{empleado.mando}}" name="empleados[{{$index}}].tipo_mando"/>{{empleado.mando}}</td>
+                    
+                    </tr>
+
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer" ng-class="{'form-loading':!dispose}">
+             @Html.ActionLink("Ir a listado", "Index", null,new { @class="btn btn-default"})
+            <input type="submit" ng-disabled="empleados.length==0" ng-click="dispose=false" value="Guardar informacion" confirm-action class="btn btn-success" />
+           
+    </div>
+</div>
+}

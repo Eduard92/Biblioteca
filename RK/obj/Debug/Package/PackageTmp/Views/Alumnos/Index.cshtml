@@ -1,0 +1,98 @@
+﻿@model IEnumerable<DataLayer.valumnos>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Alumnos";
+}
+<div class="panel" ng-controller="IndexCtrl">
+    <div class="panel-body">
+    @using (Html.BeginForm(null, null, FormMethod.Get, new { @class="form-inline"}))
+    {
+        <div class="form-group">
+            <label>Estatus</label>
+            @Html.DropDownList("act", new SelectList(new List<SelectListItem> { 
+                   new SelectListItem { Text="Todos",Value=""},
+                   new SelectListItem { Text="Activos",Value="1"},
+                   new SelectListItem { Text="Inactivos",Value="0"},
+            },"Value","Text"))
+        </div>
+        <div class="form-group">
+        @Html.TextBox("q", null, new { @class = "form-control",placeholder="Buscar por nombre" })
+        </div>
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        if (HttpContext.Current.Request.QueryString["q"]!=null)
+        {
+             @Html.ActionLink("Mostrar todos", "Index", null, new { @class = "btn btn-primary" })
+        }
+        
+        <button type="button" class="btn btn-primary pull-right" ng-click="upload()"><i class="ion-upload"></i> Importar</button>
+    }
+    </div>
+</div>
+<p class="text-right">Total registros: @ViewBag.Total</p>
+<table class="table table-striped">
+       <thead>
+            <tr class="text-uppercase">
+                <th>
+                    @Html.DisplayNameFor(model => model.fotografia)
+                    
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.matricula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.nombre)
+                </th>
+               
+               
+                
+       
+                
+                
+                <th width="14%"></th>
+            </tr>
+       </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+        <tr class="@(item.activo==1?"":"danger")">
+             <td><img src="@Url.Action("cloud_thumb", "Files", new { id=item.fotografia,width=100,height=100 })" width="70"/></td>
+            <td>@Html.DisplayFor(modelItem=>item.matricula)</td>
+            <td>@Html.DisplayFor(modelItem=>item.nombre)</td>
+            
+           
+            <td>
+                 @Html.ActionLink("Modificar", "Edit", new { id=item.id,id_alum=item.id_alum }) |
+                 @Html.ActionLink("Detalles", "Details", new { id=item.id,id_alum=item.id_alum }) 
+
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+ @Html.PagedListPager((IPagedList)Model, page => Url.Action("index", new { page = page,q=ViewBag.q }))
+<script type="text/ng-template" id="modalUpload.html">
+                            <div class="modal-header">
+                                <strong>Subir SCV</strong>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <div class="alert" ng-if="message" ng-class="{'alert-danger':!status,'alert-success':status}">{{message}}</div>
+                                <label class="custom-file m-b-2">
+                                        <input type="file" class="custom-file-input" ng-model="file" ngf-select="upload_file(file)"  accept=".csv"/>
+                                        <span class="custom-file-control form-control">Selecciona el archivo...</span>
+                                </label>
+    
+                                <div class="progress" ng-if="!dispose && file.progress>0 ">
+                                      <div class="progress-bar progress-bar-success progress-bar-striped" style="width:{{file.progress}}%"></div>
+
+                                </div>
+                                <div  ng-if="!dispose && file.progress==100">
+                                    Por favor no cierre esta ventana, esta se cerrará de manera automática al terminar el proceso...
+                                </div>
+                            </div>
+                            <div class="modal-footer" ng-class="{'form-loading':!dispose}">
+                                <button ui-wave class="btn btn-flat btn-default" ng-click="cancel()">Cancelar</button>
+                                <button ui-wave class="btn btn-flat btn-primary" ng-click="action()" ng-if="action">Aceptar</button>
+                            </div>
+</script>

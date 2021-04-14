@@ -1,0 +1,38 @@
+﻿@model  IEnumerable<DataLayer.vareas>
+@{
+    ViewBag.Title = "Areas";
+}
+
+<table class="table">
+    <thead>
+        <tr class="text-uppercase">
+            <th>
+                @Html.DisplayNameFor(model => model.centro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.area)
+            </th>
+            <th width="20%"></th>
+        </tr>
+
+    </thead>
+    
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.centro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.area)
+        </td>
+        <td>
+            @Html.ActionLink("Modificar", "Edit", new { id=item.id_area,id_centro=item.id_centro }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.id_area,id_centro=item.id_centro }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.id_area,id_centro=item.id_centro })
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DataLayer.vusers>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="panel">
+    <div class="panel-heading">Lista de usuarios @User.Identity.Name</div>
+    <div class="panel-body">
+
+        <table class="table">
+            <thead>
+            <tr class="text-uppercase">
+                  <th>
+                    @Html.DisplayNameFor(model =>model.group)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model =>model.username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.email)
+                </th>
+                <th width="20%"></th>
+            </tr>
+</thead>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.group)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Modificar", "Edit", new { id=item.id}) |
+                    @Html.ActionLink("Detalles", "Details", new {  id=item.id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.id})
+                </td>
+            </tr>
+        }
+
+        </table>
+
+    </div>
+
+</div>
+
+
+

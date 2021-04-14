@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Tablero";
+    ViewBag.ModuleDetails = null;
+
+    Dictionary<string, int> resume = ViewBag.Resume;
+}
+
+<div class="page-header">
+      <div class="row">
+        <div class="col-md-4">
+          <h1><i class="page-header-icon ion-ios-pie"></i>Analytics <span class="text-muted font-weight-light">Dashboard</span></h1>
+        </div>
+      </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="box bg-warning darken">
+          <div class="box-cell p-x-3 p-y-1">
+            <div class="font-weight-semibold font-size-12">EMPLEADOS</div>
+            <div class="font-weight-bold font-size-20">@resume["empleados"]</div>
+            <i class="box-bg-icon middle right font-size-52 ion-person"></i>
+          </div>
+        </div>
+     </div>
+    <div class="col-md-3">
+        <div class="box bg-danger darken">
+          <div class="box-cell p-x-3 p-y-1">
+            <div class="font-weight-semibold font-size-12">AREAS</div>
+            <div class="font-weight-bold font-size-20">@resume["areas"]</div>
+            <i class="box-bg-icon middle right font-size-52 ion-ios-box"></i>
+          </div>
+        </div>
+     </div>
+</div>
+<hr class="page-wide-block m-y-0">
+
+<div class="page-wide-block">
+      <div class="box m-a-0 border-radius-0" id="metrics">
+        <div class="box-row valign-top">
+
+          <!-- Fast buttons -->
+          <div class="box-cell col-md-4">
+            <div class="box-container text-xs-center text-primary">
+
+              <div class="box-row valign-middle">
+                <a href="@Url.Action("Index","Areas")" class="box-cell p-y-1 b-r-1 bg-white">
+                  <i class="ion-ios-box-outline font-size-52 line-height-1"></i>
+                  <div class="font-size-12">Areas</div>
+                </a>
+                <a href="@Url.Action("Index","Users")" class="box-cell p-y-1 bg-white">
+                  <i class="ion-ios-people-outline font-size-52 line-height-1"></i>
+                  <div class="font-size-12">Empleados</div>
+                </a>
+              </div>
+
+              <div class="box-row valign-middle">
+                <a href="@Url.Action("Details","Accounts")" class="box-cell p-y-1 b-r-1 b-t-1 bg-white">
+                  <i class="ion-ios-toggle-outline font-size-52 line-height-1"></i>
+                  <div class="font-size-12">Control Panel</div>
+                </a>
+                <a href="@Url.Action("Index","Settings")" class="box-cell p-y-1 b-t-1 bg-white">
+                  <i class="ion-ios-gear-outline font-size-52 line-height-1"></i>
+                  <div class="font-size-12">Configuraciones</div>
+                </a>
+              </div>
+
+            </div>
+          </div>
+          <!-- / Fast butons -->
+          <div class="box-cell col-md-4 p-x-4 p-t-3 p-b-4"></div>
+          <div class="box-cell col-md-4 p-x-4 p-t-3 p-b-4"></div>
+         
+
+        </div>
+        
+      </div>
+ </div>

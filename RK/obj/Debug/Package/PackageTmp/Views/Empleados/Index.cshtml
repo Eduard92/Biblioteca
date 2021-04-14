@@ -1,0 +1,88 @@
+﻿@model IEnumerable<DataLayer.vempleados>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Empleados";
+}
+<div class="panel">
+    <div class="panel-body">
+    @using (Html.BeginForm(null, null, FormMethod.Get, new { @class="form-inline"}))
+    {
+        <div class="form-group">
+            <label>Por centro/plantel:</label>
+            @Html.DropDownList("id_centro",(IEnumerable<SelectListItem>)ViewBag.id_centro,"[ Todos ]")
+        </div>
+        <div class="form-group">
+        @Html.TextBox("q", null, new { @class = "form-control",placeholder="Buscar por nombre" })
+        </div>
+        <input type="submit" value="Buscar" class="btn btn-default" />
+        if (HttpContext.Current.Request.QueryString["q"]!=null)
+        {
+             @Html.ActionLink("Mostrar todos", "Index", null, new { @class = "btn btn-primary" })
+        }
+    }
+    </div>
+</div>
+<p class="text-right">TOTAL REGISTROS: @ViewBag.TotalRows</p>
+<table class="table">
+            <thead>
+            <tr class="text-uppercase">
+                <th>
+                    @Html.DisplayNameFor(model => model.centro)
+                </th>
+                <th>
+                    
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.empleado)
+                </th>
+        
+                <th>
+                    @Html.DisplayNameFor(model => model.id_empleado)
+                </th>
+                
+       
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.fotografia)
+                    
+                </th>
+                <th width="18%"></th>
+            </tr>
+           </thead>
+        @foreach (var item in Model) {
+            <tr class="@(item.activo==1?"":"danger")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.centro)
+                </td>
+                <td>
+                   
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.empleado)
+                </td>
+        
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_empleado)
+                </td>
+                
+       
+                
+                <td>
+                   
+                    <img src="@Url.Action("cloud_thumb", "Files", new { id=item.fotografia,width=100,height=100 })" width="70" />
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id=item.id,id_area=item.id_area,id_centro=item.id_centro }) |
+                    @Html.ActionLink("Detalles", "Details", new { id=item.id,id_empleado=item.id_empleado}) 
+                   
+                    
+                       <span>|</span>
+                        @Html.ActionLink("Eliminar", "Delete", new { id=item.id,id_centro=item.id_centro,id_empleado=item.id_empleado })
+                    
+                </td>
+            </tr>
+        }
+
+ </table>
+ @Html.PagedListPager((IPagedList)Model, page => Url.Action("index", new { page = page,id_centro=ViewBag.IdCentro }))

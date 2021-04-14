@@ -1,0 +1,131 @@
+﻿@model DataLayer.modules
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>modules</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.slug)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.slug)
+            @Html.ValidationMessageFor(model => model.slug)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.version)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.version)
+            @Html.ValidationMessageFor(model => model.version)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.type)
+            @Html.ValidationMessageFor(model => model.type)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.description)
+            @Html.ValidationMessageFor(model => model.description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.skip_xss)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.skip_xss)
+            @Html.ValidationMessageFor(model => model.skip_xss)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.is_frontend)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.is_frontend)
+            @Html.ValidationMessageFor(model => model.is_frontend)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.is_backend)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.is_backend)
+            @Html.ValidationMessageFor(model => model.is_backend)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.menu)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.menu)
+            @Html.ValidationMessageFor(model => model.menu)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.enabled)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.enabled)
+            @Html.ValidationMessageFor(model => model.enabled)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.installed)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.installed)
+            @Html.ValidationMessageFor(model => model.installed)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.is_core)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.is_core)
+            @Html.ValidationMessageFor(model => model.is_core)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.updated_on)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.updated_on)
+            @Html.ValidationMessageFor(model => model.updated_on)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

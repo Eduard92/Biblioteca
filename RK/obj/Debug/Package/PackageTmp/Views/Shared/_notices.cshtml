@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+@using RK.Libraries
+
+@if (FlashData.GetFlashData("error",false) != "")
+{
+    <div class="alert alert-danger">
+
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <i class="fa fa-remove"></i>@FlashData.GetFlashData("error")
+    </div>
+}
+
+@if (FlashData.GetFlashData("success",false) != "")
+{
+    <div class="alert alert-success">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              <i class="fa fa-check"></i> @FlashData.GetFlashData("success")
+    </div>
+}

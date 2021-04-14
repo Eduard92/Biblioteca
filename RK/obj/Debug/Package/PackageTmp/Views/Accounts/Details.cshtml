@@ -1,0 +1,134 @@
+﻿@model RK.Models.UserModel
+@{
+    ViewBag.Title = "Detalles de la cuenta";
+    ViewBag.ModuleDetails = null;
+}
+
+<div class="page-header m-b-0 p-b-0 b-b-0">
+      <h1>Cuenta <span class="text-muted font-weight-light">Configuraciones</span></h1>
+
+      <ul class="nav nav-tabs page-block m-t-4 tab-resize-nav" id="account-tabs"><li class="dropdown tab-resize">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="tab-resize-icon"></span></a>
+  <ul class="dropdown-menu"></ul>
+</li>
+        <li class="active">
+          <a href="#account-profile" data-toggle="tab" aria-expanded="true">
+            Perfil
+          </a>
+        </li>
+       
+        <li class="">
+          <a href="#account-password" data-toggle="tab" aria-expanded="false">
+            Contraseña
+          </a>
+        </li>
+       
+      </ul>
+ </div>
+<div class="tab-content p-y-4">
+
+      <!-- Profile tab -->
+
+      <div class="tab-pane fade active in" id="account-profile">
+        <div class="row">
+          @using (Html.BeginForm("Details", "Accounts", FormMethod.Post, new { name = "frm1",id="frm1" }))
+          {
+            <div class="p-x-1">
+             
+              <fieldset class="form-group form-group-lg">
+                  @Html.LabelFor(model => model.username)
+                  @Html.TextBoxFor(model => model.username, new {@class="form-control",disabled=true })
+                  @Html.HiddenFor(model=>model.username)
+                
+              </fieldset>
+             <fieldset class="form-group form-group-lg" ng-init="display_name='@Model.display_name'">
+                
+                  @Html.LabelFor(model => model.display_name)
+                  @Html.TextBoxFor(model => model.display_name, new {@class="form-control",ng_model="display_name",required=true })
+                 <div ng-messages="frm1.display_name.$error"  role="alert" ng-if="frm1.display_name.$dirty && frm1.display_name.$invalid" >
+                       <div class="text-danger" ng-message="required">Este campo es requerido</div>
+                </div>
+             </fieldset>
+             <fieldset class="form-group form-group-lg" ng-init="email='@Model.email'">
+                 @Html.LabelFor(model => model.email)
+                  @Html.TextBoxFor(model => model.email, new { @class="form-control",ng_model="email",required=true})
+                <small class="text-muted">Ejemplo: ejemplo @Html.Raw("@") dominio.com</small>
+                 <div ng-messages="frm1.email.$error"  role="alert" ng-if="frm1.email.$dirty && frm1.email.$invalid" >
+                       <div class="text-danger" ng-message="required">Este campo es requerido</div>
+                </div>
+              </fieldset>
+              
+              
+              <button type="submit" name="tab" value="profile" class="btn btn-lg btn-primary m-t-3" ng-disabled="!frm1.$valid">Actualizar</button>
+             
+            </div>
+          }
+
+          <!-- Spacer -->
+          <div class="m-t-4 visible-xs visible-sm"></div>
+
+          <!-- Avatar -->
+          <!--div class="col-md-4 col-lg-3">
+            <div class="panel bg-transparent">
+              <div class="panel-body text-xs-center">
+                <img src="../../dist/demo/avatars/1.jpg" alt="" class="" style="max-width: 100%;">
+              </div>
+              <hr class="m-y-0">
+              <div class="panel-body text-xs-center">
+                <button type="button" class="btn btn-primary">Change</button>&nbsp;
+                <button type="button" class="btn"><i class="fa fa-trash"></i></button>
+                <div class="m-t-2 text-muted font-size-12">JPG, GIF or PNG. Max size of 1MB</div>
+              </div>
+            </div>
+          </!--div-->
+        </div>
+      </div>
+
+      <!-- / Profile tab -->
+
+      
+
+      <!-- Password tab -->
+
+      <div class="tab-pane fade" id="account-password">
+        @using (Html.BeginForm("Details", "Accounts", FormMethod.Post, new { name="frm2",id="frm2" }))
+        {
+           @Html.HiddenFor(model => model.email)
+           @Html.HiddenFor(model => model.username)
+           @Html.HiddenFor(model => model.display_name)
+          <fieldset class="form-group form-group-lg">
+             @Html.LabelFor(model => model.old_password)
+             @Html.PasswordFor(model => model.old_password, new {@class="form-control",ng_model="old_password",required=true })
+                <div ng-messages="frm2.old_password.$error"  role="alert" ng-if="frm2.old_password.$dirty && frm2.old_password.$invalid" >
+                       <div class="text-danger" ng-message="required">Este campo es requerido</div>
+                </div>
+          </fieldset>
+          <fieldset class="form-group form-group-lg">
+             @Html.LabelFor(model => model.new_password)
+             @Html.PasswordFor(model => model.new_password,new {@class="form-control",ng_model="new_password",required=true,minlength="7" })
+
+              <div ng-messages="frm2.new_password.$error"  role="alert" ng-if="frm2.new_password.$dirty  && frm2.new_password.$invalid" >
+                     
+                     <div class="text-danger" ng-message="minlength">Minimo de caracteres debe ser igual a 7</div>
+                </div>
+            <small class="text-muted">Minimo 7 caracteres</small>
+          </fieldset>
+          <fieldset class="form-group form-group-lg">
+             @Html.LabelFor(model => model.retype_password)
+             @Html.PasswordFor(model => model.retype_password,new {@class="form-control",ng_model="retype_password",required=true })
+              <div ng-messages="frm2.retype_password.$error"  role="alert" ng-if="frm2.new_password.$dirty && frm2.retype_password.$invalid" >
+                  <div class="text-danger" ng-message="required">Este campo es requerido</div>
+                  
+              </div>
+              
+              
+          </fieldset>
+          <button type="submit" name="tab" value="password" class="btn btn-lg btn-primary m-t-3" ng-disabled="!frm2.$valid">Cambiar contraseña</button>
+        }
+      </div>
+
+      <!-- / Password tab -->
+
+      
+
+ </div>

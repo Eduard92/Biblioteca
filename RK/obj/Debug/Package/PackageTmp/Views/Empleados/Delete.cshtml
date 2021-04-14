@@ -1,0 +1,130 @@
+﻿@model RK.Models.EmpleadoModel
+
+@{
+    ViewBag.Title = "Eliminar registro";
+}
+
+
+<div class="panel">
+    <div class="panel-heading">Eliminar empleado(@Html.DisplayFor(model=>model.nombre) @Html.DisplayFor(model=>model.apellido_paterno) @Html.DisplayFor(model=>model.apellido_materno))</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>
+                 @Html.DisplayNameFor(model => model.id_empleado)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.id_empleado)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.id_centro)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.id_centro)
+            </dd>
+
+            
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.cargo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.cargo)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.fecha_nacimiento)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fecha_nacimiento)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.rfc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.rfc)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.curp)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.curp)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.apellido_paterno)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.apellido_paterno)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.apellido_materno)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.apellido_materno)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.activo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.activo)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.direccion)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.direccion)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.telefono)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.telefono)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.fotografia)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.fotografia)
+            </dd>
+
+            <dt>
+                 @Html.DisplayNameFor(model => model.tipo_mando)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.tipo_mando)
+            </dd>
+        </dl>
+    </div>
+    <div class="panel-footer">
+        @using (Html.BeginForm()) {
+         @Html.ActionLink("Ir a listado", "Index",new{}, new { @class="btn btn-default"})
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+       
+   
+        }
+
+
+    </div>
+</div>

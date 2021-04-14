@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Configuraciones";
+}
+<ul class="nav nav-tabs tab-resize-nav" id="tab-resize-tabs">
+    <!--li class="dropdown tab-resize show">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="tab-resize-icon"></span></a>
+      <ul class="dropdown-menu"><li><a href="#tab-resize-tabs-5" data-toggle="tab">Section 5</a></li>
+            <li><a href="#tab-resize-tabs-6" data-toggle="tab">Section 6</a></li>
+            <li><a href="#tab-resize-tabs-7" data-toggle="tab">Section 7</a></li>
+            <li><a href="#tab-resize-tabs-8" data-toggle="tab">Section 8</a></li>
+            <li><a href="#tab-resize-tabs-9" data-toggle="tab">Section 9</a></li>
+
+      </ul>
+
+   </!--li-->
+              
+              
+
+    @foreach(var section_name in Model.Sections){
+              <li><a href="#tab-@section_name.Key" data-toggle="tab">@section_name.Value</a></li>
+    }
+              
+              
+              
+              
+              
+ </ul>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @class="form-vertical"}))
+{
+<div class="tab-content">
+    @foreach (var section_name in Model.Sections)
+    {
+        int inc = 0;
+              <div class="tab-pane active" id="tab-@section_name.Key">
+                   
+                    @foreach (var setting in Model.Settings[section_name.Key])
+                    {
+                        <div class="form-group row">
+                            <label class="col-md-4">@setting.title
+                                <br />
+                                <small class="text-muted">@setting.description</small>
+
+                            </label>
+                            <div class="col-md-8">
+                                <input type="hidden" name="Settings[@section_name.Key][@inc].slug" value="@setting.slug" />
+                               
+                                @MvcHtmlString.Create(RK.Models.FormsModel.BuildForm(setting,inc))
+                            </div>
+                            
+
+                        </div> 
+                        inc++;
+                    }
+              </div>
+    }        
+    <button type="submit" class="btn btn-success" confirm-action>Guardar configuracion</button>
+</div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tab-resize-tabs a:first').tab('show');
+    });
+
+</script>

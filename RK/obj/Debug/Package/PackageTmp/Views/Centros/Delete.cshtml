@@ -1,0 +1,151 @@
+﻿@model DataLayer.centros
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>centros</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.created)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.updated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.created_by)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.created_by)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ordering_count)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ordering_count)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.nombre)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.nombre)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.domicilio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.domicilio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.clave)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.clave)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.telefono)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.telefono)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.tipo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.tipo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.fecha_creacion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.fecha_creacion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.turno)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.turno)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.municipio)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.municipio)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.localidad)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.localidad)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.descripcion)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.descripcion)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.portada)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.portada)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.latitud)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.latitud)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.longitud)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.longitud)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.zoom)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.zoom)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

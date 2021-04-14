@@ -1,0 +1,64 @@
+﻿@model RK.Models.UserModel
+@{
+    ViewBag.Title = "Modificar usuario";
+    
+}
+@using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+<div class="panel">
+    <div class="panel-heading">Modificar usuario</div>
+    <div class="panel-body">
+
+      
+  
+            @Html.HiddenFor(model => model.id)
+            <div class="form-group" ng-init="group_id='@Model.group_id'">
+                
+                @Html.LabelFor(model => model.group_id)
+                @Html.DropDownList("group_id", (IEnumerable<SelectListItem>)ViewBag.group_id, " [ Seleccionar ] ", new { ng_model="group_id" })
+                @Html.ValidationMessageFor(model => model.group_id)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.username)
+                @Html.EditorFor(model => model.username)
+                @Html.ValidationMessageFor(model => model.username)
+            </div>
+    
+             <div class="form-group">
+                @Html.LabelFor(model => model.email)
+                 @Html.EditorFor(model => model.email,new{Class="form-control"})
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+           <div class="form-group">
+                @Html.LabelFor(model => model.display_name)
+                 @Html.EditorFor(model => model.display_name)
+                @Html.ValidationMessageFor(model => model.display_name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.active)
+                <div>
+                    <label class="radio-inline">@Html.RadioButtonFor(model=>model.active,"1") Si</label>
+                    <label class="radio-inline">@Html.RadioButtonFor(model=>model.active,"0") No</label>
+                </div>
+               
+                @Html.ValidationMessageFor(model => model.active)
+            </div>
+             <div class="form-group">
+                @Html.LabelFor(model => model.password)
+                 @Html.EditorFor(model => model.password)
+                @Html.ValidationMessageFor(model => model.password)
+            </div>
+
+            
+    
+    
+    </div>
+    <div class="panel-footer">
+            
+                 @Html.ActionLink("Regresar", "Index", null, new { @class="btn"})
+                <input type="submit" value="Guardar información" class="btn btn-danger confirm" />
+
+     </div>
+</div>
+  }

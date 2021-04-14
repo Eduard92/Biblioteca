@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>@RK.Libraries.Settings.Get("site_name")  - @ViewBag.Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+     @Html.Partial("_metadata")
+   
+    @Scripts.Render("~/bundles/modernizr")
+    @{
+        System.Web.HttpContextBase HttpContext = new HttpContextWrapper(System.Web.HttpContext.Current);
+    }
+</head>
+<body data-ng-app="app">
+    <script>
+        var pxInit = [];
+
+        var SITE_URL = '@(RK.Libraries.Helper.UrlBase(HttpContext))';
+
+    </script>
+    @Html.Partial("_header")
+
+    <!-- Initialize demo sidebar on page load -->
+  <script>
+     // pxDemo.initializeDemoSidebar();
+
+      pxInit.push(function () {
+          $('#px-demo-sidebar').pxSidebar();
+          pxDemo.initializeDemo();
+      });
+  </script>
+  <div class="px-content" >
+        @Html.Partial("_shortcuts")
+       @Html.Partial("_notices")
+    @RenderBody()
+         <script type="text/ng-template" id="myModal.html">
+                            <div class="modal-header">
+                                <strong>{{ title }}</strong>
+                            </div>
+                            <div class="modal-body" ng-bind-html="modal_body" id="modal-body">
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button ui-wave class="btn btn-flat btn-default" ng-click="cancel()">Cancelar</button>
+                                <button ui-wave class="btn btn-flat btn-primary" ng-click="action()" ng-if="action">Aceptar</button>
+                            </div>
+                </script>
+   </div>
+   
+    @RenderSection("scripts", required: false)
+ 
+     <script type="text/javascript">
+         pxInit.unshift(function () {
+             var file = String(document.location).split('/').pop();
+
+             // Remove unnecessary file parts
+             file = file.replace(/(\.html).*/i, '$1');
+
+             if (!/.html$/i.test(file)) {
+                 file = 'index.html';
+             }
+
+             // Activate current nav item
+             $('#px-demo-nav')
+               .find('.px-nav-item > a[href="' + file + '"]')
+               .parent()
+               .addClass('active');
+
+             $('#px-demo-nav').pxNav();
+             $('#px-demo-footer').pxFooter();
+         });
+
+         for (var i = 0, len = pxInit.length; i < len; i++) {
+             pxInit[i].call(null);
+         }
+  </script>
+     
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.form-group .text-box,.form-group textarea,.form-group select').addClass('form-control');
+            $('.dropdown-multiple').select2({
+                placeholder: 'Select value',
+            });
+        });
+
+    </script>
+</body>
+
+</html>

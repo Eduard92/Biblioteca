@@ -1,0 +1,191 @@
+﻿.modal-body h4{
+    margin:20px 0px;
+}
+.block-file
+{
+    margin-bottom:10px;
+}
+.block-file img
+{
+    width:90%;
+}
+.block-file .file_link{
+   
+    text-decoration: none;
+}
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    overflow:scroll;
+}
+.block-file .close{
+    background:red;
+    color:#FFF;
+    padding:2px 6px;
+    position: absolute;
+    font-size:13px;
+    line-height:18px;
+    /*color:red;
+    font-size: 20px;*/
+}
+.app{
+    width: 100%;
+    position: relative;
+}
+
+.app #start-camera{
+    display: none;
+    border-radius: 3px;
+    max-width: 400px;
+    color: #fff;
+    background-color: #448AFF;
+    text-decoration: none;
+    padding: 15px;
+    opacity: 0.8;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.app video#camera-stream{
+    display: none;
+    width: 100%;
+}
+
+.app img#snap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    display: none;
+}
+
+.app #error-message{
+    width: 100%;
+    background-color: #ccc;
+    color: #9b9b9b;
+    font-size: 28px;
+    padding: 200px 100px;
+    text-align: center;
+    display: none;
+}
+
+.app .controls{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 30px;
+    display: none;
+}
+
+.app .controls a{
+    border-radius: 50%;
+    color: #fff;
+    background-color: #111;
+    text-decoration: none;
+    padding: 15px;
+    line-height: 0;
+    opacity: 0.7;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.app .controls a:hover{
+    opacity: 1;
+}
+
+.app .controls a.disabled{
+    background-color: #555;
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.app .controls a.disabled:hover{
+    opacity: 0.5;
+}
+
+.app .controls a i{
+    font-size: 18px;
+}
+
+.app .controls #take-photo i{
+    font-size: 32px;
+}
+
+.app canvas{
+    display: none;
+}
+
+.app video#camera-stream.visible,
+.app img#snap.visible,
+.app #error-message.visible
+{
+    display: block;
+}
+
+.app .controls.visible{
+    display: -webkit-flex;
+    display: flex;
+}
+ .app #mask {
+     position:absolute;
+     top:0;
+     width:100%;
+     opacity:0.4;
+     height:500px;
+ }
+ .app #mask  img{
+     width:100%;
+ }
+
+
+@media(max-width: 1000px){
+    .container{
+        margin: 40px;
+    }
+
+    .app #start-camera.visible{
+        display: block;
+    }
+
+    .app .controls a i{
+        font-size: 16px;
+    }
+
+    .app .controls #take-photo i{
+        font-size: 24px;
+    }
+}
+
+
+@media(max-width: 600px){
+    .container{
+        margin: 10px;
+    }
+
+    .app #error-message{
+        padding: 80px 50px;
+        font-size: 18px;
+    }
+
+    .app .controls a i{
+        font-size: 12px;
+    }
+
+    .app .controls #take-photo i{
+        font-size: 18px;
+    }
+}
+

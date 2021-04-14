@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DataLayer.alumnos>
+@{
+    //Layout = null;
+
+    ViewBag.Title = "Upload";
+}
+@using (Html.BeginForm())
+{
+
+
+        <div class="alert" ng-if="message" ng-class="{'alert-danger':!status,'alert-success':status}">{{message}}{{file}}</div>
+        <label class="custom-file m-b-2">
+                <input type="file" class="custom-file-input" ng-model="file" ngf-select="upload_file(file)"  accept=".csv"/>
+                <span class="custom-file-control form-control">Selecciona el archivo...</span>
+        </label>
+    
+        <div class="progress">
+              <div class="progress-bar progress-bar-success progress-bar-striped" style="width:40%"></div>
+
+        </div>
+   
+        <div class="table-responsive" ng-if="alumnos.length>0">
+                <table class="table" width="100%" >
+                    <thead>
+                        <tr>
+                             <td>@Html.DisplayNameFor(model => model.matricula)</td>
+                             <td>@Html.DisplayNameFor(model => model.sexo)</td>
+                             <td>@Html.DisplayNameFor(model => model.curp)</td>
+                             <td>@Html.DisplayNameFor(model => model.fecha_naci)</td>
+                             <td>@Html.DisplayNameFor(model => model.nombre)</td>
+                             <td>@Html.DisplayNameFor(model => model.apellido_paterno)</td>
+                             <td>@Html.DisplayNameFor(model => model.apellido_materno)</td>
+                        </tr>
+                    </thead>
+                </table>
+        </div>
+    
+     
+
+}

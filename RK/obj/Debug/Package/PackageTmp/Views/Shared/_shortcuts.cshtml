@@ -1,0 +1,43 @@
+﻿@using RK.Security;
+@{
+    Layout = null;
+}
+ @if (ViewBag.ModuleDetails != null){
+     
+    
+<div class="page-header">
+      <div class="row">
+        <div class="col-md-4 text-xs-center text-md-left text-nowrap">
+          <h1><span class="text-muted font-weight-light">
+             
+              <i class="page-header-icon @ViewBag.ModuleDetails.icon"></i>
+             
+              
+              @if(ViewBag.ModuleDetails != null){ @ViewBag.ModuleDetails.name}else{@ViewBag.Title}: </span>@if(ViewBag.ModuleDetails != null){ @ViewBag.ModuleDetails.description}
+
+          </h1>
+        </div>
+
+        <hr class="page-wide-block visible-xs visible-sm">
+
+        
+         
+           
+
+                @if (ViewBag.ShortCuts != null){
+                    foreach(ShortCuts ShortCut in ViewBag.ShortCuts){
+                        <div class="col-xs-12 width-md-auto width-lg-auto width-xl-auto pull-md-right" >
+                             <a href="@Url.Content("~/"+ShortCut.uri)" @(ShortCut.extra) title="@ShortCut.title" modal-controller="@ShortCut.controller" class="btn btn-primary btn-block" ><span class="btn-label-icon left @ShortCut.icon"></span>@ShortCut.name</a>
+                        </div>
+                    }
+                }
+            
+        
+
+        <!-- Spacer -->
+        <div class="m-b-2 visible-xs visible-sm clearfix"></div>
+
+       
+      </div>
+    </div>
+ }

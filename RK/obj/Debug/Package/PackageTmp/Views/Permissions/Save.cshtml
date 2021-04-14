@@ -1,0 +1,65 @@
+﻿@model RK.Models.PermissionModel
+
+@{
+    ViewBag.Title = "Save";
+    int j = 0;
+}
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <div class="panel">
+
+        <div class="panel-heading">Asignando permisos(@Html.DisplayFor(model=>model.group_name))</div>
+        <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th width="3%"></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.group_name)
+                    </th>
+        
+                    <th>
+
+                        @Html.HiddenFor(model=>model.group_id)
+                        @Html.HiddenFor(model=>model.group_name)
+                    </th>
+                    <td></td>
+                </tr>
+
+            @foreach (var item in Model.list_module_m) {
+                <tr>
+                    <td> @MvcHtmlString.Create(String.Format("<input type='checkbox' name='list_module_m[{0}].slug' value='{1}' {2}  />",j,item.slug,item.check?"checked":"" ))</td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+        
+                    <td>
+                        @MvcHtmlString.Create(String.Format("<input type='hidden' name='list_module_m[{0}].name' value='{1}'  />",j,item.name))
+                         @MvcHtmlString.Create(String.Format("<input type='hidden' name='list_module_m[{0}].check' value='{1}'  />",j,item.check))
+                        
+                    </td>
+                    <td>
+                        @foreach(var role in ViewBag.Roles[item.slug]){
+                            <label>
+                               
+                                @role
+                                
+                                 @MvcHtmlString.Create(String.Format("<input type='checkbox' name='list_module_m[{0}].roles' value='{1}' {2}  />",j,role,item.roles.ToList().Contains(role)==true?"checked":""))
+                            </label>
+                        }
+
+                    </td>
+                </tr>
+                j++;
+            }
+
+            </table>
+       </div>
+       <div class="panel-footer">
+            @Html.ActionLink("Regresar", "Index", null, new { @class="btn btn-default" })
+            <input type="submit" value="Guardar" class="btn btn-success" />
+        </div>
+    </div>
+
+}
+

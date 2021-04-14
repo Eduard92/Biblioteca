@@ -1,0 +1,163 @@
+﻿@using RK.Security
+@using DataLayer;
+@using RK.Libraries;
+@{
+    Layout = null;
+    Dictionary<string, string> MenuLang = new Dictionary<string, string>{ 
+                {"catalogo","Catálogos"},
+                {"integration","Integración"},
+                {"general","General"},
+                {"users","Usuarios"},
+                {"settings","Configuraciones"},
+                {"files","Archivos"},
+                {"comments","Comentarios"},
+                {"viaticos","Viáticos"},
+                 {"admin","Administración"},
+           };
+
+    Dictionary<string, List<Menu>> MenuItems = ViewBag.MenuItems;
+
+    users user = Ion_Auth.GetUser(HttpContext.Current.User.Identity.Name);
+   
+   
+ }
+
+
+  <nav class="px-nav px-nav-left" id="px-demo-nav">
+    <button type="button" class="px-nav-toggle" data-toggle="px-nav">
+      <span class="px-nav-toggle-arrow"></span>
+      <span class="navbar-toggle-icon"></span>
+      <span class="px-nav-toggle-label font-size-11">HIDE MENU</span>
+    </button>
+
+    <ul class="px-nav-content">
+      <li class="px-nav-box p-a-3 b-b-1" id="demo-px-nav-box">
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <img src="@RK.Libraries.Helper.Gravatar(user.email)" alt="" class="pull-xs-left m-r-2 border-round" style="width: 54px; height: 54px;">
+        <div class="font-size-16"><span class="font-weight-light">Bienvenido(a), </span><strong>@HttpContext.Current.User.Identity.Name</strong></div>
+        <div class="btn-group" style="margin-top: 4px;">
+          <a href="#" class="btn btn-xs btn-primary btn-outline"><i class="fa fa-envelope"></i></a>
+          <a href="#" class="btn btn-xs btn-primary btn-outline"><i class="fa fa-user"></i></a>
+          <a href="#" class="btn btn-xs btn-primary btn-outline"><i class="fa fa-cog"></i></a>
+          <a href="#" class="btn btn-xs btn-danger btn-outline"><i class="fa fa-power-off"></i></a>
+        </div>
+      </li>
+      @if (MenuItems != null){
+                foreach (var Menu in MenuItems)
+                {
+                    string icon = "";
+                    switch (Menu.Key)
+                    {
+                        case "admin":
+                            icon = "fa fa-book";
+                            break;
+                        case "catalogo":
+                            icon = "fa fa-folder";
+                            break;
+                        case "users":
+                            icon = "fa fa-users";
+                            break;
+                        case "settings":
+                            icon = "fa fa-gear";
+                            break;
+                        case "data":
+                            icon = "fa fa-database";
+                            break;
+                        case "report":
+                            icon = "fa fa-bar-chart";
+                            break;
+
+                    }
+                        if (Menu.Value.Count > 1)
+                        {
+                            <li class="px-nav-item px-nav-dropdown"><a href="#"><i class="px-nav-icon  @icon"></i><span class="px-nav-label">@if(MenuLang.ContainsKey(Menu.Key)==true) {@MenuLang[Menu.Key]}else{@Menu.Key}</span></a>
+                                <ul class="px-nav-dropdown-menu">
+                                    @foreach (var SubMenu in Menu.Value)
+                                    {
+                    
+                                    <li class="px-nav-item"><a href="@Url.Content("~/"+SubMenu.slug)"><span class="px-nav-label">@SubMenu.name</span></a></li>
+                                    }
+                                </ul>
+                            </li>
+
+                        }else{
+                            foreach (var SubMenu in Menu.Value)
+                            {
+                    
+                                    <li class="px-nav-item"><a href="@Url.Content("~/"+SubMenu.slug)"><i class="px-nav-icon  @icon"></i><span class="px-nav-label">@SubMenu.name</span></a></li>
+                             }
+                        }
+                }
+            }
+      
+      
+      <!--li class="px-nav-item">
+        <a href="../../docs/index.html" target="_blank" class="bg-success b-a-0"><i class="px-nav-icon ion-social-buffer"></i><span class="px-nav-label">Docs</span></a>
+      </!--li-->
+        @if(ViewBag.Type!=null && ViewBag.Type.GetMethod("Help") != null){
+      <li class="px-nav-box b-t-1 p-a-2">
+        <a href="@Url.Action("Help")" open-modal title="Ayuda" class="btn btn-primary btn-block btn-outline">Ayuda</a>
+      </li>
+        }
+    </ul>
+  </nav>
+
+<nav class="navbar px-navbar">
+    <!-- Header -->
+    <div class="navbar-header">
+      <a class="navbar-brand px-demo-brand" href="@Url.Action("Index","Home")"><span class="px-demo-logo bg-primary"><span class="px-demo-logo-1"></span><span class="px-demo-logo-2"></span><span class="px-demo-logo-3"></span><span class="px-demo-logo-4"></span><span class="px-demo-logo-5"></span><span class="px-demo-logo-6"></span><span class="px-demo-logo-7"></span><span class="px-demo-logo-8"></span><span class="px-demo-logo-9"></span></span>RKURSOS</a>
+    </div>
+
+    <!-- Navbar togglers -->
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#px-demo-navbar-collapse" aria-expanded="false"><i class="navbar-toggle-icon"></i></button>
+
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="px-demo-navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="@Url.Action("Index","Home")">Tablero</a></li>
+        
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        <script>
+          pxInit.push(function() {
+            ///$('#navbar-notifications').perfectScrollbar();
+          });
+        </script>
+
+        
+
+        <script>
+          pxInit.push(function() {
+             //$('#navbar-messages').perfectScrollbar();
+          });
+        </script>
+
+        <!--li>
+          <form class="navbar-form" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search" style="width: 140px;">
+            </div>
+          </form>
+        </!--li-->
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img src="@RK.Libraries.Helper.Gravatar(user.email)" alt="" class="px-navbar-image">
+            <span class="hidden-md">@HttpContext.Current.User.Identity.Name</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="@Url.Action("Details","Accounts")"><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;Perfil</a></li>
+            
+            <li><a href="@Url.Action("Index","Settings")"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Configuraciones</a></li>
+            <li class="divider"></li>
+            <li><a href="@Url.Action("Logout","Users")"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Cerrar</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>

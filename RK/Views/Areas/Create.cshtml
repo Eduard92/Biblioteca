@@ -1,0 +1,38 @@
+﻿@model RK.Models.AreaModel
+
+@{
+    ViewBag.Title = "Agregar área";
+}
+
+@using (Html.BeginForm()) {
+<div class="panel">
+    <div class="panel-heading">Nueva área</div>
+    <div class="panel-body">
+         @Html.ValidationSummary(true)
+       
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_centro)
+        
+            @Html.DropDownList("id_centro",(IEnumerable<SelectListItem>)ViewBag.id_centro,"[ Seleccionar ]")
+            @Html.ValidationMessageFor(model => model.id_centro)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nombre)
+        
+            @Html.EditorFor(model => model.nombre)
+            @Html.ValidationMessageFor(model => model.nombre)
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        
+         @Html.ActionLink("Ir a listado", "Index", null, new {@class="btn btn-default" })
+        <input type="submit" value="Guardar" class="btn btn-danger" confirm-action />
+    </div>
+</div>
+
+   
+
+    
+}

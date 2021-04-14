@@ -1,0 +1,265 @@
+﻿@model RK.Models.EmpleadoModel
+
+@{
+    ViewBag.Title = "Modificar registro";
+}
+
+@using (Html.BeginForm("Edit", "Empleados",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    if (Html.ValidationSummary(true)!=null){
+        <div class="alert alert-danger">
+
+            @Html.ValidationSummary(false)
+        </div>
+        
+    }
+
+
+
+      
+    
+    <div class="panel" ng-controller="InputCtrl">
+        <div class="panel-heading">Modificar empleado "@Model.nombre @Model.apellido_paterno"</div>
+        <div class="panel-body">
+
+            <ul class="nav nav-tabs">
+              <li class="active">
+                <a href="#tabs-general" data-toggle="tab">
+                  Datos generales
+                </a>
+              </li>
+              <li>
+                <a href="#tabs-admin" data-toggle="tab">
+                 Datos administrativos
+                </a>
+              </li>
+              
+            </ul>
+            <div class="tab-content tab-content-bordered">
+              <div class="tab-pane fade in active" id="tabs-general">
+                    @Html.HiddenFor(model => model.id)
+                  <div class="row">
+                      <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.nombre)
+
+                                @Html.EditorFor(model => model.nombre )
+                                @Html.ValidationMessageFor(model => model.nombre)
+                            </div>
+                           <div class="form-group">
+                                @Html.LabelFor(model => model.apellido_paterno)
+                    
+                                @Html.EditorFor(model => model.apellido_paterno)
+                                @Html.ValidationMessageFor(model => model.apellido_paterno)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.apellido_materno)
+                    
+                                @Html.EditorFor(model => model.apellido_materno)
+                                @Html.ValidationMessageFor(model => model.apellido_materno)
+                            </div>
+                            <div class="form-group" ng-init="fecha_nacimiento='@String.Format("{0:dd/MM/yyyy}",Model.fecha_nacimiento)'">
+                                 
+                                @Html.LabelFor(model => model.fecha_nacimiento)
+        
+                                @Html.TextBox("fecha_nacimiento",String.Format("{0:dd/MM/yyyy}",Model.fecha_nacimiento), new { @class="form-control", date_picker=true,format="dd/mm/yyyy",ng_model="fecha_nacimiento" })
+                                @Html.ValidationMessageFor(model => model.fecha_nacimiento)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email)
+       
+                                @Html.EditorFor(model => model.email)
+                                @Html.ValidationMessageFor(model => model.email)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.rfc)
+        
+                                @Html.EditorFor(model => model.rfc)
+                                @Html.ValidationMessageFor(model => model.rfc)
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.curp)
+        
+                                @Html.EditorFor(model => model.curp)
+                                @Html.ValidationMessageFor(model => model.curp)
+                            </div>
+                           <div class="form-group">
+                                @Html.LabelFor(model => model.telefono)
+                           
+                                @Html.EditorFor(model => model.telefono)
+                                @Html.ValidationMessageFor(model => model.telefono)
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.direccion)
+                           
+                                @Html.EditorFor(model => model.direccion)
+                                @Html.ValidationMessageFor(model => model.direccion)
+                            </div>
+                             <div class="form-group">
+                                @Html.LabelFor(model => model.activo)
+                                <div>
+                                    <div class="radio-inline">
+                                        <label>@Html.RadioButtonFor(model => model.activo,"1") Si</label>
+                                   
+                                     
+                                    </div>
+                                    <div class="radio-inline">
+                                         <label>@Html.RadioButtonFor(model => model.activo,"0") No</label>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.activo)
+                            </div>
+                      </div>
+                      <div class="col-md-6">
+                          
+                          <div class="form-group">
+                            @Html.LabelFor(model => model.fotografia)
+                            <div class="btn-group pull-right">
+                              
+                              <button type="button" class="btn" ng-click="start_camera(true)"><i class="fa fa-camera"></i></button>
+                             
+                            </div>
+                              <hr />
+                             
+                              <div class="row" >
+
+                                  <div class="col-md-3" ng-init="camera='@Model.camera'" >
+                                      
+                                           <block-image ng-if="!camera" from="fotografia" name="fotografia" value="@Model.fotografia"  ></block-image>
+                                          
+                                          
+                                           <div class="block-file" ng-if="camera && camera!=''">
+                                               <img src="{{camera}}" />
+                                               <input type="hidden" name="camera" value="{{camera}}" />
+                                               <button type="button" title="Eliminar elemento" data-dismiss="alert" class="close" ng-click="remove_camera()"   >×</button>
+                                           </div>
+                                          
+                                         
+                                       
+                                  </div>
+                                  <div class="col-md-6" >
+                                     
+                                           <input type="file" file-read  name="fotografia" ng-model="fotografia"  accept="image/*"/>
+                                      
+                                      
+                                  </div>
+                              </div>
+                              <div class="block-camera app"  >
+                                  
+                                    
+                              </div>
+                              
+                           </div>
+                      </div>
+                  </div>
+                    
+              </div>
+              <div class="tab-pane fade in" id="tabs-admin">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="form-group" ng-init="id_centro='@Model.id_centro'">
+                            @Html.LabelFor(model => model.id_centro)
+        
+          
+                            @Html.DropDownList("id_centro",(IEnumerable<SelectListItem>)ViewBag.id_centro," [ Seleccionar ] ",new { ng_model="id_centro" })
+                            @Html.ValidationMessageFor(model => model.id_centro)
+                        </div>
+
+                        <div class="form-group" ng-init="id_area={Key:@(Model.id_area==null?0:Model.id_area)}">
+                            @Html.LabelFor(model => model.id_area)
+        
+                            @Html.DropDownList("id_area", null," [ Seleccionar ] ", new { ng_options="area.Value for area in areas track by area.Key",ng_model="id_area" })
+                            @Html.ValidationMessageFor(model => model.id_area)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.tipo_mando)
+                    
+                            @Html.DropDownList("tipo_mando",(IEnumerable<SelectListItem>)ViewBag.tipo_mando," [ Seleccionar ] ")
+                            @Html.ValidationMessageFor(model => model.tipo_mando)
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            @Html.LabelFor(model => model.cargo)
+       
+                            @Html.EditorFor(model => model.cargo)
+                            @Html.ValidationMessageFor(model => model.cargo)
+                        </div>
+                    
+                         <div class="form-group">
+                            @Html.LabelFor(model => model.id_empleado)
+                    
+                            @Html.EditorFor(model => model.id_empleado)
+                            @Html.ValidationMessageFor(model => model.id_empleado)
+                        </div>
+                       
+
+                      </div>
+                  </div>
+                    
+
+        
+
+                    
+              </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+             @Html.ActionLink("Ir a listado", "Index", null,new { @class="btn btn-default"})
+            <input type="submit" value="Guardar informacion" confirm-action class="btn btn-danger" />
+           
+        </div>
+    </div>
+        
+
+        
+
+       
+
+       
+
+        
+
+       
+
+
+        
+    
+   
+}
+<script type="text/ecmascript">
+// Register Service Worker.
+
+if ('serviceWorker' in navigator) {
+    // Path is relative to the origin, not project root.
+    navigator.serviceWorker.register('/pwa-photobooth/sw.js')
+    .then(function(reg) {
+        console.log('Registration succeeded. Scope is ' + reg.scope);
+    })
+    .catch(function(error) {
+        console.error('Registration failed with ' + error);
+    });
+}
+
+
+
+
+</script>
+<script type="text/ng-template" id="modalCamera.html">
+    <div class="modal-header">
+                                <strong>Visor camara</strong>
+    </div>
+    <div class="modal-body">
+        <div class="block-camera app" >
+                        <ng-camera start="start" ng-model="camera"></ng-camera>           
+                                    
+        </div>
+    </div
+    <div class="modal-footer">
+    </div>
+</script>
+

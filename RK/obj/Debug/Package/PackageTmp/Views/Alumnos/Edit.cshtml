@@ -1,0 +1,97 @@
+﻿@model DataLayer.alumnos
+@{
+    ViewBag.Title = "Editar alumno";
+}
+@using (Html.BeginForm("Edit", "Alumnos",FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="panel">
+    <div class="panel-heading">Editar alumno</div>
+    <div class="panel-body">
+         @Html.HiddenFor(model => model.id)
+         @Html.HiddenFor(model => model.id_alum)
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.matricula)
+                    @Html.EditorFor(model=>model.matricula)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.id_peri)
+                    @Html.EditorFor(model=>model.id_peri)
+                </div>
+                 <div class="form-group">
+                    @Html.LabelFor(model=>model.nombre)
+                    @Html.EditorFor(model=>model.nombre)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.apellido_paterno)
+                    @Html.EditorFor(model=>model.apellido_paterno)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.apellido_materno)
+                    @Html.EditorFor(model=>model.apellido_materno)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.curp)
+                    @Html.EditorFor(model=>model.curp)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.escuela)
+                    @Html.EditorFor(model=>model.escuela)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.grado)
+                    @Html.EditorFor(model=>model.grado)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.grupo)
+                    @Html.EditorFor(model=>model.grupo)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.sexo)
+                    @Html.EditorFor(model=>model.sexo)
+                </div>
+                <div class="form-group" ng-init="fecha_naci='@String.Format("{0:dd/MM/yyyy}",Model.fecha_naci)'">
+                   
+                    @Html.LabelFor(model=>model.fecha_naci)
+                    @Html.TextBoxFor(model => model.fecha_naci, new { @class="form-control",date_picker=true,ng_model="fecha_naci",format="dd/mm/yyyy" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.dom_alum)
+                    @Html.TextAreaFor(model=>model.dom_alum)
+                </div>
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.tutor)
+                    @Html.EditorFor(model=>model.tutor)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model=>model.dom_tutor)
+                    @Html.TextAreaFor(model=>model.dom_tutor)
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <block-image name="fotografia" value="@Model.fotografia" from="fotografia"></block-image>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="file" name="fotografia" accept="image/*" ng-model="fotografia" file-read />
+                    </div>
+                </div>
+                
+               
+
+            </div>
+        </div>
+       
+
+
+    </div>
+     <div class="panel-footer">
+             @Html.ActionLink("Ir a listado", "Index", null,new { @class="btn btn-default"})
+            <input type="submit" value="Guardar información" confirm-action class="btn btn-danger" />
+           
+        </div>
+</div>
+}

@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+    System.Web.HttpContextBase HttpContext = new HttpContextWrapper(System.Web.HttpContext.Current);
+}
+
+
+
+ 
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,800,300&subset=latin" rel="stylesheet" type="text/css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+
+  @Styles.Render("~/Content/css")
+  
+  <!-- Demo assets -->
+  <!--link href="../../dist/demo/demo.css" rel="stylesheet" type="text/css">
+  <script src="../../dist/demo/demo.js"></script-->
+  <!-- / Demo assets -->
+
+  <!-- holder.js -->
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/holder/2.9.0/holder.js"></script>
+ <!-- Get jQuery from Google CDN -->
+  <!--[if !IE]> -->
+    <script type="text/javascript"> window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">'+"<"+"/script>"); </script>
+  <!-- <![endif]-->
+  <!--[if lte IE 9]>
+    <script type="text/javascript"> window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">'+"<"+"/script>"); </script>
+  <![endif]-->
+ @Scripts.Render("~/Content/js")
+@{
+    var rnd = new Random();
+}
+ @if(ViewBag.Scripts != null){
+      foreach(var script in ViewBag.Scripts)
+      {
+          @Scripts.Render("~/Content/js/modules/"+script+"?lang="+rnd.Next(52).ToString());
+      }
+  }

@@ -1,0 +1,250 @@
+﻿@{
+    Layout = null;
+    }
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Sign In v1 - Pages - PixelAdmin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,800,300&subset=latin" rel="stylesheet" type="text/css">
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css">
+     @Styles.Render("~/Content/css/bootstrap.css")   
+     @Styles.Render("~/Content/css/pixeladmin.css")   
+
+
+  
+
+  <!-- Demo only: load theme directly to prevent blinking -->
+  
+    
+     @Styles.Render("~/Content/css/themes/fresh.css")  
+  <!-- Demo assets -->
+     @Styles.Render("~/Content/css/demo.css")  
+  
+ 
+    @Scripts.Render("~/Content/js/demo.js") 
+  <!-- / Demo assets -->
+</head>
+<body>
+  <script>var pxInit = [];</script>
+
+  <!-- Custom styling -->
+  <style>
+    .page-signin-modal {
+      position: relative;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+      z-index: 1;
+      display: block;
+    }
+
+    .page-signin-form-group { position: relative; }
+
+    .page-signin-icon {
+      position: absolute;
+      line-height: 21px;
+      width: 36px;
+      border-color: #d6d6d6;
+      border-right-width: 1px;
+      border-right-style: solid;
+      left: 1px;
+      top: 9px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .page-signin-icon + .page-signin-form-control { padding-left: 50px; }
+
+    #page-signin-forgot-form {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: #fff;
+      z-index: 10000;
+      display: none;
+    }
+
+    /* Margins */
+
+    .page-signin-modal > .modal-dialog { margin: 30px 10px; }
+
+    @Html.Raw("@media (min-width: 544px) {.page-signin-modal > .modal-dialog { margin: 60px auto; }}")
+  </style>
+  <!-- / Custom styling -->
+
+  <!-- Javascript -->
+  <script>
+    pxInit.push(function() {
+      $(function() {
+        pxDemo.initializeBgsDemo('body', 1, '#000', function(isBgSet) {
+          $('#px-demo-signup-link, #px-demo-signup-link a')
+            .addClass(isBgSet ? 'text-white' : 'text-muted')
+            .removeClass(isBgSet ? 'text-muted' : 'text-white');
+        });
+
+        $('#page-signin-forgot-link').on('click', function(e) {
+          e.preventDefault();
+
+          $('#page-signin-forgot-form')
+            .css({ opacity: '0', display: 'block' })
+            .animate({ opacity: '1' }, 200)
+            .find('.form-control').first().focus();
+        });
+
+        $('#page-signin-forgot-back').on('click', function(e) {
+          e.preventDefault();
+
+          $('#page-signin-forgot-form')
+            .animate({ opacity: '0' }, 200, function() {
+              $(this).css({ display: 'none' });
+            });
+
+          $('#page-signin-form').find('.form-control').first().focus();
+        });
+      });
+    });
+  </script>
+  <!-- / Javascript -->
+
+  <div class="page-signin-modal modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="box m-a-0">
+          <div class="box-row">
+
+            <div class="box-cell col-md-5 bg-warning p-a-4">
+              <div class="text-xs-center text-md-left">
+                <a class="px-demo-brand px-demo-brand-lg" href="index.html">
+                    <!--span class="px-demo-logo bg-primary m-t-0">
+                        <span class="px-demo-logo-1"></span>
+                        <span class="px-demo-logo-2"></span>
+                        <span class="px-demo-logo-3"></span>
+                        <span class="px-demo-logo-4"></span>
+                        <span class="px-demo-logo-5"></span>
+                        <span class="px-demo-logo-6"></span>
+                        <span class="px-demo-logo-7"></span>
+                        <span class="px-demo-logo-8"></span>
+                        <span class="px-demo-logo-9"></span>
+
+                    </!--span-->
+                    <img src="@Url.Content("~/Content/img/logo.png")" />
+                    <span class="font-weight-bolder font-size-18 line-height-1">RKursos</span></a>
+                <div class="font-size-15 m-t-1 line-height-1">Banco de datos del COBACAM.</div>
+              </div>
+              
+            </div>
+
+            <div class="box-cell col-md-7">
+
+              <!-- Sign In form -->
+            @using (Html.BeginForm("Login","Users",new{ ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "p-a-4",id="page-signin-form" }))
+             {
+                @Html.AntiForgeryToken()
+              
+                <h4 class="m-t-0 m-b-4 text-xs-center font-weight-semibold">Autenticación de usuarios</h4>
+
+                <fieldset class="page-signin-form-group form-group form-group-lg">
+                  <div class="page-signin-icon text-muted"><i class="ion-person"></i></div>
+                  <input type="text" name="user" class="page-signin-form-control form-control" placeholder="Usuario">
+                </fieldset>
+
+                <fieldset class="page-signin-form-group form-group form-group-lg">
+                  <div class="page-signin-icon text-muted"><i class="ion-asterisk"></i></div>
+                  <input type="password" name="pass" class="page-signin-form-control form-control" placeholder="Contraseña">
+                </fieldset>
+
+                <div class="clearfix">
+                  <label class="custom-control custom-checkbox pull-xs-left">
+                    <input type="checkbox" class="custom-control-input">
+                    <span class="custom-control-indicator"></span>
+                    Remember me
+                  </label>
+                  <a href="#" class="font-size-12 text-muted pull-xs-right" id="page-signin-forgot-link">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-block btn-lg btn-primary m-t-3">Sign In</button>
+            }
+
+              <div class="p-y-3 p-x-4 b-t-1 bg-white darken">
+                <a href="index.html" class="btn btn-block btn-lg btn-info font-size-13"><span class="btn-label-icon left fa fa-twitter"></span>Sign In with <strong>Twitter</strong></a>
+              </div>
+
+              <!-- / Sign In form -->
+
+              <!-- Reset form -->
+
+              <form action="index.html" class="p-a-4" id="page-signin-forgot-form">
+                <h4 class="m-t-0 m-b-4 text-xs-center font-weight-semibold">Password reset</h4>
+
+                <fieldset class="page-signin-form-group form-group form-group-lg">
+                  <div class="page-signin-icon text-muted"><i class="ion-at"></i></div>
+                  <input type="email" class="page-signin-form-control form-control" placeholder="Your Email">
+                </fieldset>
+
+                <button type="submit" class="btn btn-block btn-lg btn-primary m-t-3">Send password reset link</button>
+                <div class="m-t-2 text-muted">
+                  <a href="#" id="page-signin-forgot-back">&larr; Back</a>
+                </div>
+              </form>
+
+              <!-- / Reset form -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs-center m-t-2 font-weight-bold font-size-14 text-white" id="px-demo-signup-link">
+        Not a member? <a href="pages-signup-v1.html" class="text-white"><u>Sign Up now</u></a>
+      </div>
+    </div>
+  </div>
+  <div class="px-responsive-bg">
+
+      <img src="@Url.Content("~/Content/img/bgs/10.jpg")" />
+  </div>
+
+  <!-- Initialize demo sidebar on page load -->
+  <script>
+    //pxDemo.initializeDemoSidebar();
+    pxInit.push(function() {
+      $(function() {
+        $('#px-demo-sidebar').pxSidebar();
+      });
+    });
+  </script>
+
+  <!-- Get jQuery from Google CDN -->
+  <!--[if !IE]> -->
+    <script type="text/javascript"> window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">'+"<"+"/script>"); </script>
+  <!-- <![endif]-->
+  <!--[if lte IE 9]>
+    <script type="text/javascript"> window.jQuery || document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js">'+"<"+"/script>"); </script>
+  <![endif]-->
+
+  <script src="../../dist/js/bootstrap.js"></script>
+  <script src="../../dist/js/pixeladmin.js"></script>
+     @Scripts.Render("~/Content/js/bootstrap.js") 
+     @Scripts.Render("~/Content/js/pixeladmin.js") 
+  <script type="text/javascript">
+    pxInit.unshift(function() {
+      $(function() {
+        pxDemo.initializeDemo();
+      });
+    });
+
+    for (var i = 0, len = pxInit.length; i < len; i++) {
+      pxInit[i].call(null);
+    }
+  </script>
+</body>
+</html>

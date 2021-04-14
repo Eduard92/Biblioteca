@@ -1,0 +1,106 @@
+﻿@model DataLayer.modules
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>modules</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.slug)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.slug)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.version)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.version)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.type)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.type)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.skip_xss)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.skip_xss)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.is_frontend)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.is_frontend)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.is_backend)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.is_backend)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.menu)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.menu)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.enabled)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.enabled)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.installed)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.installed)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.is_core)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.is_core)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.updated_on)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.updated_on)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
